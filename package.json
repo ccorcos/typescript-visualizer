@@ -5,9 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "webpack-dev-server --content-base dist",
-		"build": "rm -rf dist && webpack -p",
-		"deploy": "git add -f dist && git commit -m 'deploy' && git push origin `git subtree split --prefix dist master`:gh-pages --force && git rm -r dist && git commit -m 'cleanup deploy'",
-		"release": "npm run build && npm run deploy"
+		"clean": "rm -rf dist",
+		"build": " webpack -p",
+		"deploy": "gh-pages-deploy"
 	},
 	"keywords": [],
 	"author": "",
@@ -22,10 +22,19 @@
 		"@types/node": "^8.0.17",
 		"@types/react": "^15.6.0",
 		"@types/react-dom": "^0.14.23",
+		"gh-pages-deploy": "^0.4.2",
 		"html-webpack-plugin": "^2.29.0",
 		"ts-loader": "^2.3.2",
 		"typescript": "^2.4.2",
 		"webpack": "^2.7.0",
 		"webpack-dev-server": "^2.6.1"
-	}
+	},
+	"gh-pages-deploy": {
+		"staticpath": "dist",
+		"prep": [
+			"clean",
+			"build"
+		],
+		"noprompt": true
+	},
 }
