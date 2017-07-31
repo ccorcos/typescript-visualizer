@@ -1,6 +1,4 @@
-# TypeScript Boilerplate
-
-This is a simple setup for getting started building a web application using TypeScript, React, Redux, ImmutableJS, and Glamor.
+# Reactive Magic TypeScript Boilerplate
 
 ## Getting Started
 

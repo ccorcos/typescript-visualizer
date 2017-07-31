@@ -1,22 +1,38 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { css } from 'glamor'
+import React from "react"
+import ReactDOM from "react-dom"
+import { Value } from "reactive-magic"
+import Component from "reactive-magic/component"
+import { css } from "glamor"
 
-const style = css({
-  color: 'blue'
+css.global("body", {
+	margin: 0,
+	padding: 0,
 })
 
-class Index extends React.PureComponent<{},{}> {
-  render() {
-    return (
-      <div className={`${style}`}>
-        Hello World!
-      </div>
-    )
-  }
+class Counter extends Component<{}> {
+	count = new Value(0)
+
+	inc = () => this.count.update(x => x + 1)
+	dec = () => this.count.update(x => x - 1)
+
+	view() {
+		return (
+			<div>
+				<button onClick={this.dec}>
+					{"-"}
+				</button>
+				<span>
+					{this.count.get()}
+				</span>
+				<button onClick={this.inc}>
+					{"+"}
+				</button>
+			</div>
+		)
+	}
 }
 
-const root = document.createElement('div')
+const root = document.createElement("div")
 document.body.appendChild(root)
 
-ReactDOM.render(<Index/>, root)
+ReactDOM.render(<Counter />, root)
