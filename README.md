@@ -1,19 +1,9 @@
-# Reactive Magic TypeScript Boilerplate
+# TS Vis
 
-## Getting Started
+Work in progress, building a Typescript AST visualizer where ideally you could directly manipulate the visualization to change the Typesript code.
 
-```sh
-git clone git@github.com:ccorcos/typescript-boilerplate.git project
-cd project
-git remote remove origin
-npm install
-npm start
-```
+## To Do
 
-An in order to be able to deploy this using Github pages, you'll need to create an push an initial branch to Github:
-
-```sh
-git checkout -b gh-pages
-git push origin gh-pages
-git checkout master
-```
+- create a visualization for pure functions
+- create a visualization for stateful classes
+- create a visualization for react components
