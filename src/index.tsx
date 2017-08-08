@@ -1,3 +1,4 @@
+/// <reference path="../node_modules/monaco-editor/monaco.d.ts" />
 import React from "react"
 import ReactDOM from "react-dom"
 import { Value } from "reactive-magic"
@@ -7,32 +8,49 @@ import { css } from "glamor"
 css.global("body", {
 	margin: 0,
 	padding: 0,
+	overflow: "hidden",
 })
 
-class Counter extends Component<{}> {
-	count = new Value(0)
+class Editor extends Component<{}> {
+	node: HTMLDivElement
+	handleRef = node => {
+		this.node = node
+	}
 
-	inc = () => this.count.update(x => x + 1)
-	dec = () => this.count.update(x => x - 1)
+	didMount() {
+		const editor = monaco.editor.create(this.node, {
+			value: ["function x() {", '\tconsole.log("Hello world!");', "}"].join(
+				"\n"
+			),
+			language: "javascript",
+		})
+	}
 
 	view() {
 		return (
-			<div>
-				<button onClick={this.dec}>
-					{"-"}
-				</button>
-				<span>
-					{this.count.get()}
-				</span>
-				<button onClick={this.inc}>
-					{"+"}
-				</button>
+			<div
+				style={{
+					position: "absolute",
+					top: 0,
+					left: 0,
+					display: "flex",
+					height: "100vh",
+					width: "100vw",
+				}}
+			>
+				<div style={{ flex: 1 }} ref={this.handleRef} />
 			</div>
 		)
 	}
 }
 
-const root = document.createElement("div")
-document.body.appendChild(root)
+declare const monacoReady: Promise<any>
 
-ReactDOM.render(<Counter />, root)
+async function main() {
+	await monacoReady
+	const root = document.createElement("div")
+	document.body.appendChild(root)
+	ReactDOM.render(<Editor />, root)
+}
+
+main().catch(console.error)

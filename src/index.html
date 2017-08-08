@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Typescript Boilerplate</title>
-  </head>
-  <body>
-  </body>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Typescript Boilerplate</title>
+</head>
+
+<body>
+	<script src="monaco-editor/min/vs/loader.js"></script>
+	<script>
+		var resolve
+		window.monacoReady = new Promise((res, rej) => resolve = res)
+		require.config({ paths: { 'vs': 'monaco-editor/min/vs' } })
+		require(['vs/editor/editor.main'], resolve)
+	</script>
+</body>
+
 </html>
